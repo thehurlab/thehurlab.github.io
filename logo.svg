@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="50" viewBox="0 0 220 50">
+  <g transform="translate(4,5)">
+    <path d="M0,20 C6,6 12,6 18,20 C24,34 30,34 36,20" stroke="#4a90d9" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M0,20 C6,34 12,34 18,20 C24,6 30,6 36,20" stroke="#7ab8ff" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="5" y1="13" x2="5" y2="27" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+    <line x1="9" y1="9" x2="9" y2="31" stroke="#c9a84c" stroke-width="1.2" opacity="0.3"/>
+    <line x1="14" y1="9" x2="14" y2="31" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+    <line x1="18" y1="13" x2="18" y2="27" stroke="#c9a84c" stroke-width="1.2" opacity="0.3"/>
+    <line x1="23" y1="9" x2="23" y2="31" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+    <line x1="27" y1="9" x2="27" y2="31" stroke="#c9a84c" stroke-width="1.2" opacity="0.3"/>
+    <line x1="32" y1="13" x2="32" y2="27" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+  </g>
+  <text x="52" y="25" font-family="'Playfair Display',Georgia,serif" font-size="24" font-weight="700" fill="#ffffff">Hur</text>
+  <text x="100" y="25" font-family="'Playfair Display',Georgia,serif" font-size="24" font-weight="700" fill="#c9a84c">Lab</text>
+  <text x="52" y="40" font-family="'Inter','Helvetica Neue',sans-serif" font-size="7" fill="rgba(255,255,255,0.5)" letter-spacing="1.2">GENOME EDITING &amp; RNA BIOLOGY</text>
+</svg>
