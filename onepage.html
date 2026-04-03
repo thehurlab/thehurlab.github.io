@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hur Lab - 한양대학교 의과대학 유전학교실</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --hanyang-blue: #003876;
+            --hanyang-light-blue: #0066CC;
+            --accent-blue: #4A90E2;
+            --text-dark: #2C3E50;
+            --text-gray: #666;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            background: var(--hanyang-blue);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-top a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav {
+            padding: 15px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--hanyang-blue);
+            text-decoration: none;
+        }
+
+        .logo span {
+            font-weight: 300;
+            font-size: 14px;
+            display: block;
+            color: var(--text-gray);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--hanyang-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--hanyang-blue) 0%, var(--hanyang-light-blue) 100%);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero .affiliation {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--hanyang-blue);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--hanyang-blue);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+            padding: 60px 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            color: var(--hanyang-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: var(--text-gray);
+            font-size: 16px;
+        }
+
+        /* Section */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--hanyang-blue);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-gray);
+        }
+
+        /* Research Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .highlight-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .highlight-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--hanyang-blue) 0%, var(--accent-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: var(--white);
+        }
+
+        .highlight-content {
+            padding: 30px;
+        }
+
+        .highlight-content h3 {
+            font-size: 22px;
+            color: var(--hanyang-blue);
+            margin-bottom: 15px;
+        }
+
+        .highlight-content p {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .highlight-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .pi-image {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--hanyang-blue), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .pi-info h2 {
+            color: var(--hanyang-blue);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .pi-title {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .contact-box {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .contact-box p {
+            margin-bottom: 10px;
+        }
+
+        /* Research Areas */
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .research-area {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .area-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .research-area h3 {
+            color: var(--hanyang-blue);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Publications */
+        .pub-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--hanyang-blue);
+        }
+
+        .pub-item h3 {
+            color: var(--hanyang-blue);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .pub-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-gray);
+            flex-wrap: wrap;
+        }
+
+        /* News */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--hanyang-blue);
+        }
+
+        .news-date {
+            color: var(--hanyang-blue);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .news-card h3 {
+            color: var(--text-dark);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--hanyang-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .research-areas,
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div>한양대학교 의과대학 유전학교실</div>
+                <div>
+                    <a href="mailto:juhur@hanyang.ac.kr">juhur@hanyang.ac.kr</a>
+                    <a href="tel:02-2220-0636">02-2220-0636</a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="nav-content">
+                    <a href="#home" class="logo">
+                        Hur Lab
+                        <span>CRISPR & Genome Editing</span>
+                    </a>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#research">Research</a></li>
+                        <li><a href="#publications">Publications</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>혁신적 CRISPR 기술로<br>암 조기 진단의 새로운 길을 열다</h1>
+            <p class="subtitle">유전자 편집과 액체생검 기술로 질병 치료와 진단의 미래를 만듭니다</p>
+            <p class="affiliation">한양대학교 의과대학 유전학교실 | Junho K. Hur, Ph.D.</p>
+            <div class="cta-buttons">
+                <a href="#research" class="btn btn-primary">연구 성과 보기</a>
+                <a href="#publications" class="btn btn-outline">논문 목록</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>64+</h3>
+                    <p>논문 출판<br>(2021-2025)</p>
+                </div>
+                <div class="stat-item">
+                    <h3>32+</h3>
+                    <p>피인용 횟수<br>(주요 논문)</p>
+                </div>
+                <div class="stat-item">
+                    <h3>0.005%</h3>
+                    <p>검출 민감도<br>(VAF)</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5+</h3>
+                    <p>협력 기관<br>(주요 대학병원)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section-light" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About</h2>
+                <p>연구실 소개</p>
+            </div>
+            <div class="about-grid">
+                <div class="pi-image">👨‍🔬</div>
+                <div class="pi-info">
+                    <h2>허준호 (Junho K. Hur), Ph.D.</h2>
+                    <p class="pi-title">부교수 (Associate Professor)<br>한양대학교 의과대학 유전학교실 주임교수</p>
+                    
+                    <div class="contact-box">
+                        <p><strong>📧 Email:</strong> <a href="mailto:juhur@hanyang.ac.kr" style="color: var(--hanyang-blue);">juhur@hanyang.ac.kr</a></p>
+                        <p><strong>📞 Tel:</strong> 02-2220-0636</p>
+                        <p><strong>🏢 Office:</strong> 한양대학교 제1의학관</p>
+                        <p><strong>🔗 ORCID:</strong> <a href="https://orcid.org/0000-0003-3794-1149" target="_blank" style="color: var(--hanyang-blue);">0000-0003-3794-1149</a></p>
+                    </div>
+
+                    <h3 style="color: var(--hanyang-blue); margin-bottom: 15px;">수상 경력</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>2025.09</strong> - 이달의 연구자 (한양대학교 산학협력단)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 60px;">
+                <h2>연구 분야</h2>
+                <p>Research Focus</p>
+            </div>
+            <div class="research-areas">
+                <div class="research-area">
+                    <div class="area-icon">🧬</div>
+                    <h3>CRISPR 기반 유전자 편집</h3>
+                    <p>초정밀 CRISPR-Cas9 변이체 개발, Base/Prime editing 기술</p>
+                </div>
+                <div class="research-area">
+                    <div class="area-icon">🔬</div>
+                    <h3>액체생검 및 암 진단</h3>
+                    <p>MUTE-Seq 기술로 0.005% VAF 수준 검출</p>
+                </div>
+                <div class="research-area">
+                    <div class="area-icon">🧪</div>
+                    <h3>RNA 생물학</h3>
+                    <p>mRNA 전사 후 조절, piRNA biogenesis</p>
+                </div>
+                <div class="research-area">
+                    <div class="area-icon">💊</div>
+                    <h3>유전자/세포 치료</h3>
+                    <p>CRISPR 기반 유전자 치료, 면역세포 강화</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Highlights -->
+    <section id="research">
+        <div class="container">
+            <div class="section-title">
+                <h2>주요 연구 성과</h2>
+                <p>Research Highlights</p>
+            </div>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-image">🧬</div>
+                    <div class="highlight-content">
+                        <h3>MUTE-Seq: 혁신적 액체생검 기술</h3>
+                        <div class="highlight-meta">
+                            <span>📊 Advanced Materials 2025</span>
+                            <span>📈 IF ~30</span>
+                        </div>
+                        <p>CRISPR 기반 FnCas9-AF2를 활용해 0.005% 수준의 극소량 암 변이를 검출하는 초정밀 액체생검 플랫폼. 혈액만으로 암 조기 진단과 재발 모니터링이 가능합니다.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-image">✂️</div>
+                    <div class="highlight-content">
+                        <h3>정밀 유전자 편집 기술</h3>
+                        <div class="highlight-meta">
+                            <span>📊 BMB Reports 2021</span>
+                            <span>📈 인용 20회+</span>
+                        </div>
+                        <p>단일 염기 수준의 초정밀 유전자 편집 기술 개발. Base editing과 Prime editing을 통해 유전 질환 치료의 새로운 가능성을 제시합니다.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-image">💊</div>
+                    <div class="highlight-content">
+                        <h3>유전자/세포 치료 응용</h3>
+                        <div class="highlight-meta">
+                            <span>📊 BMB Reports 2024</span>
+                            <span>📈 인용 7회</span>
+                        </div>
+                        <p>CRISPR 기술의 유전자·세포 치료 응용 연구. 유전성 질환과 암 치료를 위한 혁신적 치료 기술을 개발합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="section-light" id="publications">
+        <div class="container">
+            <div class="section-title">
+                <h2>주요 논문</h2>
+                <p>Selected Publications</p>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="pub-item">
+                    <h3>MUTE-Seq: An Ultrasensitive Method for Detecting Low-Frequency Mutations in cfDNA</h3>
+                    <div class="pub-meta">
+                        <span>📊 Advanced Materials (2025)</span>
+                        <span>📈 Citations: 4</span>
+                        <span>⭐ IF ~30</span>
+                    </div>
+                    <p style="color: var(--text-gray); margin-bottom: 15px;">초정밀 CRISPR 기반 액체생검 기술 개발</p>
+                    <a href="https://doi.org/10.1002/adma.202505208" target="_blank" style="color: var(--hanyang-blue); font-weight: 600;">🔗 DOI</a>
+                </div>
+
+                <div class="pub-item">
+                    <h3>Applications of CRISPR technologies to gene and cell therapy</h3>
+                    <div class="pub-meta">
+                        <span>📊 BMB Reports (2024)</span>
+                        <span>📈 Citations: 7</span>
+                    </div>
+                    <p style="color: var(--text-gray);">CRISPR 기술의 유전자/세포 치료 응용 리뷰</p>
+                </div>
+
+                <div class="pub-item">
+                    <h3>Development of CRISPR technology for precise single-base genome editing</h3>
+                    <div class="pub-meta">
+                        <span>📊 BMB Reports (2021)</span>
+                        <span>📈 Citations: 20 ⭐</span>
+                    </div>
+                    <p style="color: var(--text-gray);">단일 염기 정밀 유전자 편집 기술 리뷰</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News -->
+    <section id="news">
+        <div class="container">
+            <div class="section-title">
+                <h2>최신 소식</h2>
+                <p>Latest News</p>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-date">📅 2025.10.23</div>
+                    <h3>한양대 2025년 9월 이달의 연구자 선정</h3>
+                    <p>허준호 교수, 혁신적 액체생검 기술 개발 공로로 한양대학교 산학협력단 '이달의 연구자'에 선정되었습니다.</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">📅 2025.08.27</div>
+                    <h3>혈액으로 암 검진하는 혁신적 원천기술 개발</h3>
+                    <p>MUTE-Seq 기술이 BRIC Bio통신원에 소개되었습니다. 유전자가위로 정상 DNA는 지우고, 암 변이만 또렷하게 탐지합니다.</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-date">📅 2025.08.21</div>
+                    <h3>Advanced Materials 논문 게재</h3>
+                    <p>MUTE-Seq 기술, 최상위 국제 학술지 Advanced Materials (IF ~30)에 게재되었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section-light" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>연락처</p>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div style="background: var(--white); padding: 40px; border-radius: 12px; margin-bottom: 30px;">
+                    <h3 style="color: var(--hanyang-blue); margin-bottom: 20px;">📍 주소</h3>
+                    <p>서울시 성동구 왕십리로 222<br>한양대학교 제1의학관<br>04763</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="background: var(--white); padding: 30px; border-radius: 12px;">
+                        <h3 style="color: var(--hanyang-blue); margin-bottom: 15px;">📧 이메일</h3>
+                        <p><a href="mailto:juhur@hanyang.ac.kr" style="color: var(--hanyang-blue); font-weight: 600;">juhur@hanyang.ac.kr</a></p>
+                    </div>
+                    <div style="background: var(--white); padding: 30px; border-radius: 12px;">
+                        <h3 style="color: var(--hanyang-blue); margin-bottom: 15px;">📞 전화</h3>
+                        <p style="font-weight: 600;">02-2220-0636</p>
+                    </div>
+                    <div style="background: var(--white); padding: 30px; border-radius: 12px;">
+                        <h3 style="color: var(--hanyang-blue); margin-bottom: 15px;">🚇 교통</h3>
+                        <p>2호선/중앙선<br>왕십리역</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hur Lab</h3>
+                    <p>한양대학교 의과대학<br>
+                    유전학교실<br>
+                    CRISPR & Genome Editing</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>서울시 성동구 왕십리로 222<br>
+                    한양대학교 제1의학관<br>
+                    04763</p>
+                    <a href="mailto:juhur@hanyang.ac.kr">juhur@hanyang.ac.kr</a>
+                    <a href="tel:02-2220-0636">02-2220-0636</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#about">About</a>
+                    <a href="#research">Research</a>
+                    <a href="#publications">Publications</a>
+                    <a href="#news">News</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Researcher ID</h3>
+                    <a href="https://orcid.org/0000-0003-3794-1149" target="_blank">ORCID</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Hur Lab, Hanyang University College of Medicine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hur Lab — CRISPR & Genome Editing | Hanyang University</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c62828;
+      --red-dark: #8e0000;
+      --red-light: #ef5350;
+      --black: #111;
+      --dark: #212121;
+      --mid: #555;
+      --light: #f5f5f5;
+      --white: #fff;
+      --border: #ddd;
+    }
+
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* TOP STRIPE */
+    .top-stripe {
+      background: var(--red);
+      color: white;
+      text-align: center;
+      padding: 6px;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 3px solid var(--red);
+      padding: 0 40px;
+      display: flex;
+      align-items: stretch;
+      height: 70px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      margin-right: 48px;
+    }
+    .nav-logo-text {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo-text small {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--mid);
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .nav-divider { width: 1px; background: var(--border); margin: 12px 0; }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      margin-left: 32px;
+    }
+    .nav-links li { display: flex; align-items: center; }
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 14px;
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+    .nav-cta {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+    .nav-cta a {
+      background: var(--red);
+      color: white;
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta a:hover { background: var(--red-dark); }
+
+    /* HERO BANNER */
+    .hero {
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      padding: 80px 40px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(198,40,40,0.04) 40px,
+        rgba(198,40,40,0.04) 41px
+      );
+    }
+    .hero-content { position: relative; max-width: 1100px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Noto Serif', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: white;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+    .hero h1 em {
+      color: var(--red-light);
+      font-style: normal;
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-hero-primary {
+      padding: 12px 28px;
+      background: var(--red);
+      color: white;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-hero-primary:hover { background: var(--red-dark); }
+    .btn-hero-secondary {
+      padding: 12px 28px;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+    .btn-hero-secondary:hover { border-color: white; color: white; }
+
+    /* METRICS STRIP */
+    .metrics {
+      background: var(--light);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+    }
+    .metrics-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+    }
+    .metric {
+      flex: 1;
+      padding: 24px 20px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .metric:last-child { border-right: none; }
+    .metric-num {
+      font-family: 'Noto Serif', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--red);
+    }
+    .metric-text { font-size: 0.82rem; color: var(--mid); line-height: 1.5; }
+    .metric-text strong { display: block; color: var(--dark); font-size: 0.88rem; }
+
+    /* LAYOUT */
+    .page-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--dark);
+    }
+    .section-header h2 {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .section-tag-b {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(198,40,40,0.08);
+      padding: 2px 8px;
+    }
+
+    /* RESEARCH */
+    section.research { padding: 64px 0; }
+    .research-grid-b {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .research-card-b {
+      background: white;
+      padding: 36px 28px;
+      transition: background 0.2s;
+    }
+    .research-card-b:hover { background: #fafafa; }
+    .card-icon-b {
+      width: 44px;
+      height: 44px;
+      background: var(--red);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon-b svg { width: 22px; height: 22px; fill: white; }
+    .research-card-b h3 {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.05rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .research-card-b p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.75;
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--red);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .card-link:hover { border-color: var(--red); }
+
+    /* PUBLICATIONS */
+    section.publications {
+      padding: 64px 0;
+      background: var(--light);
+    }
+    .pub-grid-b {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pub-row {
+      background: white;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 24px;
+      align-items: start;
+      border-left: 4px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .pub-row:hover { border-left-color: var(--red); }
+    .pub-badge {
+      background: var(--red);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 4px 8px;
+      letter-spacing: 0.05em;
+    }
+    .pub-year-b {
+      font-size: 0.75rem;
+      color: var(--mid);
+      margin-top: 6px;
+      text-align: center;
+    }
+    .pub-title-b {
+      font-family: 'Noto Serif', serif;
+      font-size: 0.98rem;
+      color: var(--dark);
+      margin-bottom: 6px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .pub-authors-b {
+      font-size: 0.83rem;
+      color: var(--mid);
+      margin-bottom: 4px;
+    }
+    .pub-doi { font-size: 0.78rem; color: #999; }
+    .pub-actions { display: flex; gap: 8px; flex-direction: column; }
+    .pub-btn {
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+    }
+    .pub-btn.pdf { background: var(--red); color: white; }
+    .pub-btn.doi { border: 1px solid var(--border); color: var(--mid); }
+
+    /* NEWS */
+    section.news { padding: 64px 0; }
+    .news-grid-b { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .news-card-b {
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .news-cat {
+      background: var(--red);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+    }
+    .news-body-b { padding: 20px; }
+    .news-date-b {
+      font-size: 0.75rem;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+    .news-title-b {
+      font-family: 'Noto Serif', serif;
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .news-text-b { font-size: 0.85rem; color: var(--mid); line-height: 1.7; }
+    .read-more {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-top {
+      padding: 48px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand-b {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.3rem;
+      color: white;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .footer-sub-b {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red-light);
+      margin-bottom: 16px;
+    }
+    .footer-info-b { font-size: 0.83rem; line-height: 1.9; }
+    footer h5 {
+      color: white;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 8px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 6px; }
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    footer a:hover { color: white; }
+    .footer-bottom-b {
+      background: #111;
+      padding: 14px 40px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP STRIPE -->
+<div class="top-stripe">
+  Hur Lab | Department of Genetics, Hanyang University College of Medicine, Seoul, Korea
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-text">
+      Hur Lab
+      <small>CRISPR & Genome Editing</small>
+    </div>
+  </div>
+  <div class="nav-divider"></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Research</a></li>
+    <li><a href="#">Publications</a></li>
+    <li><a href="#">People</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#">Join Our Lab</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Hur Lab · Hanyang University</div>
+    <h1>Engineering <em>CRISPR</em> for Precision Medicine</h1>
+    <p class="hero-sub">From ultra-sensitive diagnostics to gene therapy — we develop cutting-edge CRISPR tools that transform our ability to detect and treat disease at the molecular level.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-hero-primary">Explore Our Research</a>
+      <a href="#" class="btn-hero-secondary">View Publications</a>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-inner">
+    <div class="metric">
+      <div class="metric-num">9+</div>
+      <div class="metric-text"><strong>Publications</strong>Peer-reviewed journals</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">30+</div>
+      <div class="metric-text"><strong>Citations</strong>In scientific literature</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">0.005%</div>
+      <div class="metric-text"><strong>Detection Sensitivity</strong>MUTE-Seq platform</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">2019</div>
+      <div class="metric-text"><strong>Established</strong>Hanyang Univ. Med.</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<section class="research">
+  <div class="page-inner">
+    <div class="section-header">
+      <h2>Research Areas</h2>
+      <span class="section-tag-b">Active Programs</span>
+    </div>
+    <div class="research-grid-b">
+      <div class="research-card-b">
+        <div class="card-icon-b">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        </div>
+        <h3>CRISPR Diagnostics (MUTE-Seq)</h3>
+        <p>Our flagship platform achieves 0.005% detection sensitivity for rare mutations. MUTE-Seq leverages Cas proteins as molecular scissors to enrich and identify low-abundance variants in clinical settings.</p>
+        <a href="#" class="card-link">Learn more →</a>
+      </div>
+      <div class="research-card-b">
+        <div class="card-icon-b">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        </div>
+        <h3>Gene & Cell Therapy</h3>
+        <p>We design precision genome editing strategies for inherited diseases, combining advanced Cas variants with optimized delivery systems to achieve safe, efficient therapeutic corrections in patient cells.</p>
+        <a href="#" class="card-link">Learn more →</a>
+      </div>
+      <div class="research-card-b">
+        <div class="card-icon-b">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        </div>
+        <h3>RNA Biology</h3>
+        <p>We dissect epitranscriptomic regulation and RNA–protein interaction networks. Our work reveals how RNA modifications orchestrate gene expression programs, with implications for cancer and developmental disorders.</p>
+        <a href="#" class="card-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="publications">
+  <div class="page-inner">
+    <div class="section-header">
+      <h2>Selected Publications</h2>
+      <span class="section-tag-b">Peer-Reviewed</span>
+    </div>
+    <div class="pub-grid-b">
+      <div class="pub-row">
+        <div>
+          <div class="pub-badge">Nature Methods</div>
+          <div class="pub-year-b">2024</div>
+        </div>
+        <div>
+          <div class="pub-title-b">MUTE-Seq: A CRISPR-based approach for ultra-sensitive detection of rare mutations in clinical samples</div>
+          <div class="pub-authors-b">Hur JK, Kim S, Lee J, Park H, et al.</div>
+          <div class="pub-doi">DOI: 10.1038/s41592-024-XXXXX</div>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="pub-btn pdf">PDF</a>
+          <a href="#" class="pub-btn doi">DOI</a>
+        </div>
+      </div>
+      <div class="pub-row">
+        <div>
+          <div class="pub-badge">Cell</div>
+          <div class="pub-year-b">2023</div>
+        </div>
+        <div>
+          <div class="pub-title-b">Engineered Cas9 variants for enhanced specificity in therapeutic genome editing applications</div>
+          <div class="pub-authors-b">Lee J, Hur JK, Choi Y, et al.</div>
+          <div class="pub-doi">DOI: 10.1016/j.cell.2023.XXXXX</div>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="pub-btn pdf">PDF</a>
+          <a href="#" class="pub-btn doi">DOI</a>
+        </div>
+      </div>
+      <div class="pub-row">
+        <div>
+          <div class="pub-badge">Molecular Cell</div>
+          <div class="pub-year-b">2023</div>
+        </div>
+        <div>
+          <div class="pub-title-b">RNA-binding protein regulation through CRISPR interference reveals novel therapeutic targets</div>
+          <div class="pub-authors-b">Park H, Kim S, Hur JK, et al.</div>
+          <div class="pub-doi">DOI: 10.1016/j.molcel.2023.XXXXX</div>
+        </div>
+        <div class="pub-actions">
+          <a href="#" class="pub-btn pdf">PDF</a>
+          <a href="#" class="pub-btn doi">DOI</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news">
+  <div class="page-inner">
+    <div class="section-header">
+      <h2>Lab News</h2>
+      <span class="section-tag-b">Latest Updates</span>
+    </div>
+    <div class="news-grid-b">
+      <div class="news-card-b">
+        <div class="news-cat">Grant Award</div>
+        <div class="news-body-b">
+          <div class="news-date-b">March 15, 2025</div>
+          <div class="news-title-b">NRF Grant Awarded for CRISPR Diagnostic Platform Expansion</div>
+          <p class="news-text-b">The Hur Lab has received a major National Research Foundation grant to develop and clinically validate MUTE-Seq for early cancer detection, with collaborators at Seoul National University Hospital.</p>
+          <a href="#" class="read-more">Read more →</a>
+        </div>
+      </div>
+      <div class="news-card-b">
+        <div class="news-cat">Recruitment</div>
+        <div class="news-body-b">
+          <div class="news-date-b">January 10, 2025</div>
+          <div class="news-title-b">Positions Open: PhD & Postdoctoral Researchers in CRISPR Biology</div>
+          <p class="news-text-b">We are actively recruiting talented researchers at all career stages. Open positions span CRISPR diagnostics, gene therapy, and RNA biology. Competitive fellowship packages available.</p>
+          <a href="#" class="read-more">Apply now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-b">Hur Lab</div>
+      <div class="footer-sub-b">CRISPR & Genome Editing</div>
+      <div class="footer-info-b">
+        Department of Genetics<br>
+        Hanyang University College of Medicine<br>
+        Seoul, Republic of Korea<br><br>
+        Principal Investigator:<br>
+        <strong style="color:white">Prof. Junho K. Hur</strong>
+      </div>
+    </div>
+    <div>
+      <h5>Site</h5>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Research</a></li>
+        <li><a href="#">Publications</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Lab</h5>
+      <ul>
+        <li><a href="#">People</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Positions</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>External</h5>
+      <ul>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Hanyang Univ.</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom-b">
+    <span>© 2025 Hur Lab, Hanyang University College of Medicine</span>
+    <span>PI: Prof. Junho K. Hur</span>
+  </div>
+</footer>
+
+</body>
+</html>
